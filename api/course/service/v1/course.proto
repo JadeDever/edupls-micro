@@ -2,9 +2,7 @@ syntax = "proto3";
 
 package api.course.service.v1;
 
-option go_package = "edupls/api/course/service/v1;v1";
-option java_multiple_files = true;
-option java_package = "api.course.service.v1";
+option go_package = "edupls/api/course/service/v1;v1"; 
 
 service Course {
 	rpc CreateCourse (CreateCourseRequest) returns (CreateCourseReply);

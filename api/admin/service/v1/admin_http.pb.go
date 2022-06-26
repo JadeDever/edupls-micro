@@ -20,24 +20,44 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationAdminAddressListByUid = "/api.admin.service.v1.Admin/AddressListByUid"
 const OperationAdminCaptcha = "/api.admin.service.v1.Admin/Captcha"
+const OperationAdminCoursesListByUid = "/api.admin.service.v1.Admin/CoursesListByUid"
 const OperationAdminCreateAddress = "/api.admin.service.v1.Admin/CreateAddress"
+const OperationAdminCreateCourses = "/api.admin.service.v1.Admin/CreateCourses"
+const OperationAdminCreateOrders = "/api.admin.service.v1.Admin/CreateOrders"
 const OperationAdminDefaultAddress = "/api.admin.service.v1.Admin/DefaultAddress"
+const OperationAdminDefaultCourses = "/api.admin.service.v1.Admin/DefaultCourses"
+const OperationAdminDefaultOrders = "/api.admin.service.v1.Admin/DefaultOrders"
 const OperationAdminDeleteAddress = "/api.admin.service.v1.Admin/DeleteAddress"
+const OperationAdminDeleteCourses = "/api.admin.service.v1.Admin/DeleteCourses"
+const OperationAdminDeleteOrders = "/api.admin.service.v1.Admin/DeleteOrders"
 const OperationAdminDetail = "/api.admin.service.v1.Admin/Detail"
 const OperationAdminLogin = "/api.admin.service.v1.Admin/Login"
+const OperationAdminOrdersListByUid = "/api.admin.service.v1.Admin/OrdersListByUid"
 const OperationAdminRegister = "/api.admin.service.v1.Admin/Register"
 const OperationAdminUpdateAddress = "/api.admin.service.v1.Admin/UpdateAddress"
+const OperationAdminUpdateCourses = "/api.admin.service.v1.Admin/UpdateCourses"
+const OperationAdminUpdateOrders = "/api.admin.service.v1.Admin/UpdateOrders"
 
 type AdminHTTPServer interface {
 	AddressListByUid(context.Context, *emptypb.Empty) (*ListAddressReply, error)
 	Captcha(context.Context, *emptypb.Empty) (*CaptchaReply, error)
+	CoursesListByUid(context.Context, *emptypb.Empty) (*ListCoursesReply, error)
 	CreateAddress(context.Context, *CreateAddressReq) (*AddressInfo, error)
+	CreateCourses(context.Context, *CreateCoursesReq) (*CoursesInfo, error)
+	CreateOrders(context.Context, *CreateOrdersReq) (*OrdersInfo, error)
 	DefaultAddress(context.Context, *AddressReq) (*CheckResponse, error)
+	DefaultCourses(context.Context, *CoursesReq) (*CheckResponse, error)
+	DefaultOrders(context.Context, *OrdersReq) (*CheckResponse, error)
 	DeleteAddress(context.Context, *AddressReq) (*CheckResponse, error)
+	DeleteCourses(context.Context, *CoursesReq) (*CheckResponse, error)
+	DeleteOrders(context.Context, *OrdersReq) (*CheckResponse, error)
 	Detail(context.Context, *emptypb.Empty) (*UserDetailResponse, error)
 	Login(context.Context, *LoginReq) (*RegisterReply, error)
+	OrdersListByUid(context.Context, *emptypb.Empty) (*ListOrdersReply, error)
 	Register(context.Context, *RegisterReq) (*RegisterReply, error)
 	UpdateAddress(context.Context, *UpdateAddressReq) (*CheckResponse, error)
+	UpdateCourses(context.Context, *UpdateCoursesReq) (*CheckResponse, error)
+	UpdateOrders(context.Context, *UpdateOrdersReq) (*CheckResponse, error)
 }
 
 func RegisterAdminHTTPServer(s *http.Server, srv AdminHTTPServer) {
@@ -51,6 +71,16 @@ func RegisterAdminHTTPServer(s *http.Server, srv AdminHTTPServer) {
 	r.PUT("/api/address/update", _Admin_UpdateAddress0_HTTP_Handler(srv))
 	r.PUT("/api/address/default", _Admin_DefaultAddress0_HTTP_Handler(srv))
 	r.DELETE("/api/address/delete", _Admin_DeleteAddress0_HTTP_Handler(srv))
+	r.POST("/api/orders/create", _Admin_CreateOrders0_HTTP_Handler(srv))
+	r.GET("/api/orders/list/uid", _Admin_OrdersListByUid0_HTTP_Handler(srv))
+	r.PUT("/api/orders/update", _Admin_UpdateOrders0_HTTP_Handler(srv))
+	r.PUT("/api/orders/default", _Admin_DefaultOrders0_HTTP_Handler(srv))
+	r.DELETE("/api/orders/delete", _Admin_DeleteOrders0_HTTP_Handler(srv))
+	r.POST("/api/courses/create", _Admin_CreateCourses0_HTTP_Handler(srv))
+	r.GET("/api/courses/list/uid", _Admin_CoursesListByUid0_HTTP_Handler(srv))
+	r.PUT("/api/courses/update", _Admin_UpdateCourses0_HTTP_Handler(srv))
+	r.PUT("/api/courses/default", _Admin_DefaultCourses0_HTTP_Handler(srv))
+	r.DELETE("/api/courses/delete", _Admin_DeleteCourses0_HTTP_Handler(srv))
 }
 
 func _Admin_Register0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
@@ -224,16 +254,216 @@ func _Admin_DeleteAddress0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Conte
 	}
 }
 
+func _Admin_CreateOrders0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateOrdersReq
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAdminCreateOrders)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateOrders(ctx, req.(*CreateOrdersReq))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*OrdersInfo)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Admin_OrdersListByUid0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in emptypb.Empty
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAdminOrdersListByUid)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.OrdersListByUid(ctx, req.(*emptypb.Empty))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListOrdersReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Admin_UpdateOrders0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateOrdersReq
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAdminUpdateOrders)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateOrders(ctx, req.(*UpdateOrdersReq))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CheckResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Admin_DefaultOrders0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in OrdersReq
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAdminDefaultOrders)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DefaultOrders(ctx, req.(*OrdersReq))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CheckResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Admin_DeleteOrders0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in OrdersReq
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAdminDeleteOrders)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteOrders(ctx, req.(*OrdersReq))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CheckResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Admin_CreateCourses0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateCoursesReq
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAdminCreateCourses)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateCourses(ctx, req.(*CreateCoursesReq))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CoursesInfo)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Admin_CoursesListByUid0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in emptypb.Empty
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAdminCoursesListByUid)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CoursesListByUid(ctx, req.(*emptypb.Empty))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListCoursesReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Admin_UpdateCourses0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateCoursesReq
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAdminUpdateCourses)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateCourses(ctx, req.(*UpdateCoursesReq))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CheckResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Admin_DefaultCourses0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CoursesReq
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAdminDefaultCourses)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DefaultCourses(ctx, req.(*CoursesReq))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CheckResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Admin_DeleteCourses0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CoursesReq
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAdminDeleteCourses)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteCourses(ctx, req.(*CoursesReq))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CheckResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type AdminHTTPClient interface {
 	AddressListByUid(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *ListAddressReply, err error)
 	Captcha(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *CaptchaReply, err error)
+	CoursesListByUid(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *ListCoursesReply, err error)
 	CreateAddress(ctx context.Context, req *CreateAddressReq, opts ...http.CallOption) (rsp *AddressInfo, err error)
+	CreateCourses(ctx context.Context, req *CreateCoursesReq, opts ...http.CallOption) (rsp *CoursesInfo, err error)
+	CreateOrders(ctx context.Context, req *CreateOrdersReq, opts ...http.CallOption) (rsp *OrdersInfo, err error)
 	DefaultAddress(ctx context.Context, req *AddressReq, opts ...http.CallOption) (rsp *CheckResponse, err error)
+	DefaultCourses(ctx context.Context, req *CoursesReq, opts ...http.CallOption) (rsp *CheckResponse, err error)
+	DefaultOrders(ctx context.Context, req *OrdersReq, opts ...http.CallOption) (rsp *CheckResponse, err error)
 	DeleteAddress(ctx context.Context, req *AddressReq, opts ...http.CallOption) (rsp *CheckResponse, err error)
+	DeleteCourses(ctx context.Context, req *CoursesReq, opts ...http.CallOption) (rsp *CheckResponse, err error)
+	DeleteOrders(ctx context.Context, req *OrdersReq, opts ...http.CallOption) (rsp *CheckResponse, err error)
 	Detail(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *UserDetailResponse, err error)
 	Login(ctx context.Context, req *LoginReq, opts ...http.CallOption) (rsp *RegisterReply, err error)
+	OrdersListByUid(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *ListOrdersReply, err error)
 	Register(ctx context.Context, req *RegisterReq, opts ...http.CallOption) (rsp *RegisterReply, err error)
 	UpdateAddress(ctx context.Context, req *UpdateAddressReq, opts ...http.CallOption) (rsp *CheckResponse, err error)
+	UpdateCourses(ctx context.Context, req *UpdateCoursesReq, opts ...http.CallOption) (rsp *CheckResponse, err error)
+	UpdateOrders(ctx context.Context, req *UpdateOrdersReq, opts ...http.CallOption) (rsp *CheckResponse, err error)
 }
 
 type AdminHTTPClientImpl struct {
@@ -270,11 +500,50 @@ func (c *AdminHTTPClientImpl) Captcha(ctx context.Context, in *emptypb.Empty, op
 	return &out, err
 }
 
+func (c *AdminHTTPClientImpl) CoursesListByUid(ctx context.Context, in *emptypb.Empty, opts ...http.CallOption) (*ListCoursesReply, error) {
+	var out ListCoursesReply
+	pattern := "/api/courses/list/uid"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationAdminCoursesListByUid))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
 func (c *AdminHTTPClientImpl) CreateAddress(ctx context.Context, in *CreateAddressReq, opts ...http.CallOption) (*AddressInfo, error) {
 	var out AddressInfo
 	pattern := "/api/address/create"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationAdminCreateAddress))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *AdminHTTPClientImpl) CreateCourses(ctx context.Context, in *CreateCoursesReq, opts ...http.CallOption) (*CoursesInfo, error) {
+	var out CoursesInfo
+	pattern := "/api/courses/create"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAdminCreateCourses))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *AdminHTTPClientImpl) CreateOrders(ctx context.Context, in *CreateOrdersReq, opts ...http.CallOption) (*OrdersInfo, error) {
+	var out OrdersInfo
+	pattern := "/api/orders/create"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAdminCreateOrders))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -296,11 +565,63 @@ func (c *AdminHTTPClientImpl) DefaultAddress(ctx context.Context, in *AddressReq
 	return &out, err
 }
 
+func (c *AdminHTTPClientImpl) DefaultCourses(ctx context.Context, in *CoursesReq, opts ...http.CallOption) (*CheckResponse, error) {
+	var out CheckResponse
+	pattern := "/api/courses/default"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAdminDefaultCourses))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *AdminHTTPClientImpl) DefaultOrders(ctx context.Context, in *OrdersReq, opts ...http.CallOption) (*CheckResponse, error) {
+	var out CheckResponse
+	pattern := "/api/orders/default"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAdminDefaultOrders))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
 func (c *AdminHTTPClientImpl) DeleteAddress(ctx context.Context, in *AddressReq, opts ...http.CallOption) (*CheckResponse, error) {
 	var out CheckResponse
 	pattern := "/api/address/delete"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationAdminDeleteAddress))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *AdminHTTPClientImpl) DeleteCourses(ctx context.Context, in *CoursesReq, opts ...http.CallOption) (*CheckResponse, error) {
+	var out CheckResponse
+	pattern := "/api/courses/delete"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationAdminDeleteCourses))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *AdminHTTPClientImpl) DeleteOrders(ctx context.Context, in *OrdersReq, opts ...http.CallOption) (*CheckResponse, error) {
+	var out CheckResponse
+	pattern := "/api/orders/delete"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationAdminDeleteOrders))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
@@ -335,6 +656,19 @@ func (c *AdminHTTPClientImpl) Login(ctx context.Context, in *LoginReq, opts ...h
 	return &out, err
 }
 
+func (c *AdminHTTPClientImpl) OrdersListByUid(ctx context.Context, in *emptypb.Empty, opts ...http.CallOption) (*ListOrdersReply, error) {
+	var out ListOrdersReply
+	pattern := "/api/orders/list/uid"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationAdminOrdersListByUid))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
 func (c *AdminHTTPClientImpl) Register(ctx context.Context, in *RegisterReq, opts ...http.CallOption) (*RegisterReply, error) {
 	var out RegisterReply
 	pattern := "/api/users/register"
@@ -353,6 +687,32 @@ func (c *AdminHTTPClientImpl) UpdateAddress(ctx context.Context, in *UpdateAddre
 	pattern := "/api/address/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationAdminUpdateAddress))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *AdminHTTPClientImpl) UpdateCourses(ctx context.Context, in *UpdateCoursesReq, opts ...http.CallOption) (*CheckResponse, error) {
+	var out CheckResponse
+	pattern := "/api/courses/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAdminUpdateCourses))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *AdminHTTPClientImpl) UpdateOrders(ctx context.Context, in *UpdateOrdersReq, opts ...http.CallOption) (*CheckResponse, error) {
+	var out CheckResponse
+	pattern := "/api/orders/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAdminUpdateOrders))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {

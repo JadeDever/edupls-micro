@@ -1,31 +1,38 @@
+/*
+ * @Author: Jadedever
+ * @Date: 2022-06-26 21:09:11
+ * @LastEditors: Jadedever
+ * @LastEditTime: 2022-06-26 21:48:27
+ * @FilePath: /edupls-micro/app/job/service/internal/service/job.go
+ * @Description:
+ *
+ * Copyright (c) 2022 by Jadedever, All Rights Reserved.
+ */
 package service
 
 import (
 	"context"
+	v1 "edupls/api/job/service/v1"
+	"edupls/app/job/service/internal/biz"
 
-	pb "edupls/api/job/service/v1"
+	"github.com/go-kratos/kratos/v2/log"
 )
 
 type JobService struct {
-	pb.UnimplementedJobServer
+	v1.UnimplementedJobServer
+
+	ac  *biz.JobUseCase
+	log *log.Helper
 }
 
-func NewJobService() *JobService {
-	return &JobService{}
+func NewJobService(ac *biz.JobUseCase, logger log.Logger) *JobService {
+	return &JobService{
+		ac:  ac,
+		log: log.NewHelper(log.With(logger, "module", "service/job")),
+	}
+
 }
 
-func (s *JobService) CreateJob(ctx context.Context, req *pb.CreateJobRequest) (*pb.CreateJobReply, error) {
-	return &pb.CreateJobReply{}, nil
-}
-func (s *JobService) UpdateJob(ctx context.Context, req *pb.UpdateJobRequest) (*pb.UpdateJobReply, error) {
-	return &pb.UpdateJobReply{}, nil
-}
-func (s *JobService) DeleteJob(ctx context.Context, req *pb.DeleteJobRequest) (*pb.DeleteJobReply, error) {
-	return &pb.DeleteJobReply{}, nil
-}
-func (s *JobService) GetJob(ctx context.Context, req *pb.GetJobRequest) (*pb.GetJobReply, error) {
-	return &pb.GetJobReply{}, nil
-}
-func (s *JobService) ListJob(ctx context.Context, req *pb.ListJobRequest) (*pb.ListJobReply, error) {
-	return &pb.ListJobReply{}, nil
+func (s *JobService) IntegratingJob(ctx context.Context, req *v1.IntegratingJobReq) (*v1.IntegratingJobReply, error) {
+	return &v1.IntegratingJobReply{}, s.ac.IntegratingJob(ctx)
 }

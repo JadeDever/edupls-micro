@@ -2,9 +2,7 @@ syntax = "proto3";
 
 package api.order.service.v1;
 
-option go_package = "edupls/api/order/service/v1;v1";
-option java_multiple_files = true;
-option java_package = "api.order.service.v1";
+option go_package = "edupls/api/order/service/v1;v1"; 
 
 service Order {
 	rpc CreateOrder (CreateOrderRequest) returns (CreateOrderReply);

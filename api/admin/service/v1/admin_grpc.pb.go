@@ -32,6 +32,16 @@ type AdminClient interface {
 	UpdateAddress(ctx context.Context, in *UpdateAddressReq, opts ...grpc.CallOption) (*CheckResponse, error)
 	DefaultAddress(ctx context.Context, in *AddressReq, opts ...grpc.CallOption) (*CheckResponse, error)
 	DeleteAddress(ctx context.Context, in *AddressReq, opts ...grpc.CallOption) (*CheckResponse, error)
+	CreateOrders(ctx context.Context, in *CreateOrdersReq, opts ...grpc.CallOption) (*OrdersInfo, error)
+	OrdersListByUid(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListOrdersReply, error)
+	UpdateOrders(ctx context.Context, in *UpdateOrdersReq, opts ...grpc.CallOption) (*CheckResponse, error)
+	DefaultOrders(ctx context.Context, in *OrdersReq, opts ...grpc.CallOption) (*CheckResponse, error)
+	DeleteOrders(ctx context.Context, in *OrdersReq, opts ...grpc.CallOption) (*CheckResponse, error)
+	CreateCourses(ctx context.Context, in *CreateCoursesReq, opts ...grpc.CallOption) (*CoursesInfo, error)
+	CoursesListByUid(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListCoursesReply, error)
+	UpdateCourses(ctx context.Context, in *UpdateCoursesReq, opts ...grpc.CallOption) (*CheckResponse, error)
+	DefaultCourses(ctx context.Context, in *CoursesReq, opts ...grpc.CallOption) (*CheckResponse, error)
+	DeleteCourses(ctx context.Context, in *CoursesReq, opts ...grpc.CallOption) (*CheckResponse, error)
 }
 
 type adminClient struct {
@@ -123,6 +133,96 @@ func (c *adminClient) DeleteAddress(ctx context.Context, in *AddressReq, opts ..
 	return out, nil
 }
 
+func (c *adminClient) CreateOrders(ctx context.Context, in *CreateOrdersReq, opts ...grpc.CallOption) (*OrdersInfo, error) {
+	out := new(OrdersInfo)
+	err := c.cc.Invoke(ctx, "/api.admin.service.v1.Admin/CreateOrders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) OrdersListByUid(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListOrdersReply, error) {
+	out := new(ListOrdersReply)
+	err := c.cc.Invoke(ctx, "/api.admin.service.v1.Admin/OrdersListByUid", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) UpdateOrders(ctx context.Context, in *UpdateOrdersReq, opts ...grpc.CallOption) (*CheckResponse, error) {
+	out := new(CheckResponse)
+	err := c.cc.Invoke(ctx, "/api.admin.service.v1.Admin/UpdateOrders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) DefaultOrders(ctx context.Context, in *OrdersReq, opts ...grpc.CallOption) (*CheckResponse, error) {
+	out := new(CheckResponse)
+	err := c.cc.Invoke(ctx, "/api.admin.service.v1.Admin/DefaultOrders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) DeleteOrders(ctx context.Context, in *OrdersReq, opts ...grpc.CallOption) (*CheckResponse, error) {
+	out := new(CheckResponse)
+	err := c.cc.Invoke(ctx, "/api.admin.service.v1.Admin/DeleteOrders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) CreateCourses(ctx context.Context, in *CreateCoursesReq, opts ...grpc.CallOption) (*CoursesInfo, error) {
+	out := new(CoursesInfo)
+	err := c.cc.Invoke(ctx, "/api.admin.service.v1.Admin/CreateCourses", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) CoursesListByUid(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListCoursesReply, error) {
+	out := new(ListCoursesReply)
+	err := c.cc.Invoke(ctx, "/api.admin.service.v1.Admin/CoursesListByUid", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) UpdateCourses(ctx context.Context, in *UpdateCoursesReq, opts ...grpc.CallOption) (*CheckResponse, error) {
+	out := new(CheckResponse)
+	err := c.cc.Invoke(ctx, "/api.admin.service.v1.Admin/UpdateCourses", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) DefaultCourses(ctx context.Context, in *CoursesReq, opts ...grpc.CallOption) (*CheckResponse, error) {
+	out := new(CheckResponse)
+	err := c.cc.Invoke(ctx, "/api.admin.service.v1.Admin/DefaultCourses", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) DeleteCourses(ctx context.Context, in *CoursesReq, opts ...grpc.CallOption) (*CheckResponse, error) {
+	out := new(CheckResponse)
+	err := c.cc.Invoke(ctx, "/api.admin.service.v1.Admin/DeleteCourses", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AdminServer is the server API for Admin service.
 // All implementations must embed UnimplementedAdminServer
 // for forward compatibility
@@ -136,6 +236,16 @@ type AdminServer interface {
 	UpdateAddress(context.Context, *UpdateAddressReq) (*CheckResponse, error)
 	DefaultAddress(context.Context, *AddressReq) (*CheckResponse, error)
 	DeleteAddress(context.Context, *AddressReq) (*CheckResponse, error)
+	CreateOrders(context.Context, *CreateOrdersReq) (*OrdersInfo, error)
+	OrdersListByUid(context.Context, *emptypb.Empty) (*ListOrdersReply, error)
+	UpdateOrders(context.Context, *UpdateOrdersReq) (*CheckResponse, error)
+	DefaultOrders(context.Context, *OrdersReq) (*CheckResponse, error)
+	DeleteOrders(context.Context, *OrdersReq) (*CheckResponse, error)
+	CreateCourses(context.Context, *CreateCoursesReq) (*CoursesInfo, error)
+	CoursesListByUid(context.Context, *emptypb.Empty) (*ListCoursesReply, error)
+	UpdateCourses(context.Context, *UpdateCoursesReq) (*CheckResponse, error)
+	DefaultCourses(context.Context, *CoursesReq) (*CheckResponse, error)
+	DeleteCourses(context.Context, *CoursesReq) (*CheckResponse, error)
 	mustEmbedUnimplementedAdminServer()
 }
 
@@ -169,6 +279,36 @@ func (UnimplementedAdminServer) DefaultAddress(context.Context, *AddressReq) (*C
 }
 func (UnimplementedAdminServer) DeleteAddress(context.Context, *AddressReq) (*CheckResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAddress not implemented")
+}
+func (UnimplementedAdminServer) CreateOrders(context.Context, *CreateOrdersReq) (*OrdersInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateOrders not implemented")
+}
+func (UnimplementedAdminServer) OrdersListByUid(context.Context, *emptypb.Empty) (*ListOrdersReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrdersListByUid not implemented")
+}
+func (UnimplementedAdminServer) UpdateOrders(context.Context, *UpdateOrdersReq) (*CheckResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrders not implemented")
+}
+func (UnimplementedAdminServer) DefaultOrders(context.Context, *OrdersReq) (*CheckResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DefaultOrders not implemented")
+}
+func (UnimplementedAdminServer) DeleteOrders(context.Context, *OrdersReq) (*CheckResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrders not implemented")
+}
+func (UnimplementedAdminServer) CreateCourses(context.Context, *CreateCoursesReq) (*CoursesInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCourses not implemented")
+}
+func (UnimplementedAdminServer) CoursesListByUid(context.Context, *emptypb.Empty) (*ListCoursesReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CoursesListByUid not implemented")
+}
+func (UnimplementedAdminServer) UpdateCourses(context.Context, *UpdateCoursesReq) (*CheckResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCourses not implemented")
+}
+func (UnimplementedAdminServer) DefaultCourses(context.Context, *CoursesReq) (*CheckResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DefaultCourses not implemented")
+}
+func (UnimplementedAdminServer) DeleteCourses(context.Context, *CoursesReq) (*CheckResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCourses not implemented")
 }
 func (UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
 
@@ -345,6 +485,186 @@ func _Admin_DeleteAddress_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Admin_CreateOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOrdersReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).CreateOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.admin.service.v1.Admin/CreateOrders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).CreateOrders(ctx, req.(*CreateOrdersReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_OrdersListByUid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).OrdersListByUid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.admin.service.v1.Admin/OrdersListByUid",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).OrdersListByUid(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_UpdateOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOrdersReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).UpdateOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.admin.service.v1.Admin/UpdateOrders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).UpdateOrders(ctx, req.(*UpdateOrdersReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_DefaultOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OrdersReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).DefaultOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.admin.service.v1.Admin/DefaultOrders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).DefaultOrders(ctx, req.(*OrdersReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_DeleteOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OrdersReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).DeleteOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.admin.service.v1.Admin/DeleteOrders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).DeleteOrders(ctx, req.(*OrdersReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_CreateCourses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCoursesReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).CreateCourses(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.admin.service.v1.Admin/CreateCourses",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).CreateCourses(ctx, req.(*CreateCoursesReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_CoursesListByUid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).CoursesListByUid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.admin.service.v1.Admin/CoursesListByUid",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).CoursesListByUid(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_UpdateCourses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCoursesReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).UpdateCourses(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.admin.service.v1.Admin/UpdateCourses",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).UpdateCourses(ctx, req.(*UpdateCoursesReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_DefaultCourses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CoursesReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).DefaultCourses(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.admin.service.v1.Admin/DefaultCourses",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).DefaultCourses(ctx, req.(*CoursesReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_DeleteCourses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CoursesReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).DeleteCourses(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.admin.service.v1.Admin/DeleteCourses",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).DeleteCourses(ctx, req.(*CoursesReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Admin_ServiceDesc is the grpc.ServiceDesc for Admin service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -387,6 +707,46 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAddress",
 			Handler:    _Admin_DeleteAddress_Handler,
+		},
+		{
+			MethodName: "CreateOrders",
+			Handler:    _Admin_CreateOrders_Handler,
+		},
+		{
+			MethodName: "OrdersListByUid",
+			Handler:    _Admin_OrdersListByUid_Handler,
+		},
+		{
+			MethodName: "UpdateOrders",
+			Handler:    _Admin_UpdateOrders_Handler,
+		},
+		{
+			MethodName: "DefaultOrders",
+			Handler:    _Admin_DefaultOrders_Handler,
+		},
+		{
+			MethodName: "DeleteOrders",
+			Handler:    _Admin_DeleteOrders_Handler,
+		},
+		{
+			MethodName: "CreateCourses",
+			Handler:    _Admin_CreateCourses_Handler,
+		},
+		{
+			MethodName: "CoursesListByUid",
+			Handler:    _Admin_CoursesListByUid_Handler,
+		},
+		{
+			MethodName: "UpdateCourses",
+			Handler:    _Admin_UpdateCourses_Handler,
+		},
+		{
+			MethodName: "DefaultCourses",
+			Handler:    _Admin_DefaultCourses_Handler,
+		},
+		{
+			MethodName: "DeleteCourses",
+			Handler:    _Admin_DeleteCourses_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

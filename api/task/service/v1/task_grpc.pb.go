@@ -22,11 +22,8 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TaskClient interface {
-	CreateTask(ctx context.Context, in *CreateTaskRequest, opts ...grpc.CallOption) (*CreateTaskReply, error)
-	UpdateTask(ctx context.Context, in *UpdateTaskRequest, opts ...grpc.CallOption) (*UpdateTaskReply, error)
-	DeleteTask(ctx context.Context, in *DeleteTaskRequest, opts ...grpc.CallOption) (*DeleteTaskReply, error)
-	GetTask(ctx context.Context, in *GetTaskRequest, opts ...grpc.CallOption) (*GetTaskReply, error)
-	ListTask(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskReply, error)
+	IntegratingCount(ctx context.Context, in *IntegratingCountReq, opts ...grpc.CallOption) (*IntegratingCountReply, error)
+	GetIntegrating(ctx context.Context, in *GetIntegratingReq, opts ...grpc.CallOption) (*GetIntegratingReply, error)
 }
 
 type taskClient struct {
@@ -37,45 +34,18 @@ func NewTaskClient(cc grpc.ClientConnInterface) TaskClient {
 	return &taskClient{cc}
 }
 
-func (c *taskClient) CreateTask(ctx context.Context, in *CreateTaskRequest, opts ...grpc.CallOption) (*CreateTaskReply, error) {
-	out := new(CreateTaskReply)
-	err := c.cc.Invoke(ctx, "/api.task.service.v1.Task/CreateTask", in, out, opts...)
+func (c *taskClient) IntegratingCount(ctx context.Context, in *IntegratingCountReq, opts ...grpc.CallOption) (*IntegratingCountReply, error) {
+	out := new(IntegratingCountReply)
+	err := c.cc.Invoke(ctx, "/api.task.service.v1.Task/IntegratingCount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *taskClient) UpdateTask(ctx context.Context, in *UpdateTaskRequest, opts ...grpc.CallOption) (*UpdateTaskReply, error) {
-	out := new(UpdateTaskReply)
-	err := c.cc.Invoke(ctx, "/api.task.service.v1.Task/UpdateTask", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *taskClient) DeleteTask(ctx context.Context, in *DeleteTaskRequest, opts ...grpc.CallOption) (*DeleteTaskReply, error) {
-	out := new(DeleteTaskReply)
-	err := c.cc.Invoke(ctx, "/api.task.service.v1.Task/DeleteTask", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *taskClient) GetTask(ctx context.Context, in *GetTaskRequest, opts ...grpc.CallOption) (*GetTaskReply, error) {
-	out := new(GetTaskReply)
-	err := c.cc.Invoke(ctx, "/api.task.service.v1.Task/GetTask", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *taskClient) ListTask(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskReply, error) {
-	out := new(ListTaskReply)
-	err := c.cc.Invoke(ctx, "/api.task.service.v1.Task/ListTask", in, out, opts...)
+func (c *taskClient) GetIntegrating(ctx context.Context, in *GetIntegratingReq, opts ...grpc.CallOption) (*GetIntegratingReply, error) {
+	out := new(GetIntegratingReply)
+	err := c.cc.Invoke(ctx, "/api.task.service.v1.Task/GetIntegrating", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -86,11 +56,8 @@ func (c *taskClient) ListTask(ctx context.Context, in *ListTaskRequest, opts ...
 // All implementations must embed UnimplementedTaskServer
 // for forward compatibility
 type TaskServer interface {
-	CreateTask(context.Context, *CreateTaskRequest) (*CreateTaskReply, error)
-	UpdateTask(context.Context, *UpdateTaskRequest) (*UpdateTaskReply, error)
-	DeleteTask(context.Context, *DeleteTaskRequest) (*DeleteTaskReply, error)
-	GetTask(context.Context, *GetTaskRequest) (*GetTaskReply, error)
-	ListTask(context.Context, *ListTaskRequest) (*ListTaskReply, error)
+	IntegratingCount(context.Context, *IntegratingCountReq) (*IntegratingCountReply, error)
+	GetIntegrating(context.Context, *GetIntegratingReq) (*GetIntegratingReply, error)
 	mustEmbedUnimplementedTaskServer()
 }
 
@@ -98,20 +65,11 @@ type TaskServer interface {
 type UnimplementedTaskServer struct {
 }
 
-func (UnimplementedTaskServer) CreateTask(context.Context, *CreateTaskRequest) (*CreateTaskReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateTask not implemented")
+func (UnimplementedTaskServer) IntegratingCount(context.Context, *IntegratingCountReq) (*IntegratingCountReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IntegratingCount not implemented")
 }
-func (UnimplementedTaskServer) UpdateTask(context.Context, *UpdateTaskRequest) (*UpdateTaskReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateTask not implemented")
-}
-func (UnimplementedTaskServer) DeleteTask(context.Context, *DeleteTaskRequest) (*DeleteTaskReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteTask not implemented")
-}
-func (UnimplementedTaskServer) GetTask(context.Context, *GetTaskRequest) (*GetTaskReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTask not implemented")
-}
-func (UnimplementedTaskServer) ListTask(context.Context, *ListTaskRequest) (*ListTaskReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListTask not implemented")
+func (UnimplementedTaskServer) GetIntegrating(context.Context, *GetIntegratingReq) (*GetIntegratingReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetIntegrating not implemented")
 }
 func (UnimplementedTaskServer) mustEmbedUnimplementedTaskServer() {}
 
@@ -126,92 +84,38 @@ func RegisterTaskServer(s grpc.ServiceRegistrar, srv TaskServer) {
 	s.RegisterService(&Task_ServiceDesc, srv)
 }
 
-func _Task_CreateTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateTaskRequest)
+func _Task_IntegratingCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IntegratingCountReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskServer).CreateTask(ctx, in)
+		return srv.(TaskServer).IntegratingCount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.task.service.v1.Task/CreateTask",
+		FullMethod: "/api.task.service.v1.Task/IntegratingCount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskServer).CreateTask(ctx, req.(*CreateTaskRequest))
+		return srv.(TaskServer).IntegratingCount(ctx, req.(*IntegratingCountReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Task_UpdateTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateTaskRequest)
+func _Task_GetIntegrating_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIntegratingReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskServer).UpdateTask(ctx, in)
+		return srv.(TaskServer).GetIntegrating(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.task.service.v1.Task/UpdateTask",
+		FullMethod: "/api.task.service.v1.Task/GetIntegrating",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskServer).UpdateTask(ctx, req.(*UpdateTaskRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Task_DeleteTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteTaskRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TaskServer).DeleteTask(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.task.service.v1.Task/DeleteTask",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskServer).DeleteTask(ctx, req.(*DeleteTaskRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Task_GetTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTaskRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TaskServer).GetTask(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.task.service.v1.Task/GetTask",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskServer).GetTask(ctx, req.(*GetTaskRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Task_ListTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListTaskRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TaskServer).ListTask(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.task.service.v1.Task/ListTask",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskServer).ListTask(ctx, req.(*ListTaskRequest))
+		return srv.(TaskServer).GetIntegrating(ctx, req.(*GetIntegratingReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -224,24 +128,12 @@ var Task_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*TaskServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateTask",
-			Handler:    _Task_CreateTask_Handler,
+			MethodName: "IntegratingCount",
+			Handler:    _Task_IntegratingCount_Handler,
 		},
 		{
-			MethodName: "UpdateTask",
-			Handler:    _Task_UpdateTask_Handler,
-		},
-		{
-			MethodName: "DeleteTask",
-			Handler:    _Task_DeleteTask_Handler,
-		},
-		{
-			MethodName: "GetTask",
-			Handler:    _Task_GetTask_Handler,
-		},
-		{
-			MethodName: "ListTask",
-			Handler:    _Task_ListTask_Handler,
+			MethodName: "GetIntegrating",
+			Handler:    _Task_GetIntegrating_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

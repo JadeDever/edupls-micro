@@ -35,6 +35,1670 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on CreateCoursesReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *CreateCoursesReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateCoursesReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateCoursesReqMultiError, or nil if none found.
+func (m *CreateCoursesReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateCoursesReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Uid
+
+	if utf8.RuneCountInString(m.GetName()) < 1 {
+		err := CreateCoursesReqValidationError{
+			field:  "Name",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetMobile()) != 11 {
+		err := CreateCoursesReqValidationError{
+			field:  "Mobile",
+			reason: "value length must be 11 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+
+	}
+
+	if utf8.RuneCountInString(m.GetProvince()) < 1 {
+		err := CreateCoursesReqValidationError{
+			field:  "Province",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetCity()) < 1 {
+		err := CreateCoursesReqValidationError{
+			field:  "City",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetDistricts()) < 1 {
+		err := CreateCoursesReqValidationError{
+			field:  "Districts",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetCourses()) < 1 {
+		err := CreateCoursesReqValidationError{
+			field:  "Courses",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for PostCode
+
+	// no validation rules for IsDefault
+
+	if len(errors) > 0 {
+		return CreateCoursesReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateCoursesReqMultiError is an error wrapping multiple validation errors
+// returned by CreateCoursesReq.ValidateAll() if the designated constraints
+// aren't met.
+type CreateCoursesReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateCoursesReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateCoursesReqMultiError) AllErrors() []error { return m }
+
+// CreateCoursesReqValidationError is the validation error returned by
+// CreateCoursesReq.Validate if the designated constraints aren't met.
+type CreateCoursesReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateCoursesReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateCoursesReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateCoursesReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateCoursesReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateCoursesReqValidationError) ErrorName() string { return "CreateCoursesReqValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CreateCoursesReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateCoursesReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateCoursesReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateCoursesReqValidationError{}
+
+// Validate checks the field values on UpdateCoursesReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *UpdateCoursesReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateCoursesReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateCoursesReqMultiError, or nil if none found.
+func (m *UpdateCoursesReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateCoursesReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Uid
+
+	// no validation rules for Name
+
+	if utf8.RuneCountInString(m.GetMobile()) != 11 {
+		err := UpdateCoursesReqValidationError{
+			field:  "Mobile",
+			reason: "value length must be 11 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+
+	}
+
+	if utf8.RuneCountInString(m.GetProvince()) < 1 {
+		err := UpdateCoursesReqValidationError{
+			field:  "Province",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetCity()) < 1 {
+		err := UpdateCoursesReqValidationError{
+			field:  "City",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetDistricts()) < 1 {
+		err := UpdateCoursesReqValidationError{
+			field:  "Districts",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetCourses()) < 1 {
+		err := UpdateCoursesReqValidationError{
+			field:  "Courses",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for PostCode
+
+	// no validation rules for IsDefault
+
+	if m.GetId() < 1 {
+		err := UpdateCoursesReqValidationError{
+			field:  "Id",
+			reason: "value must be greater than or equal to 1",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return UpdateCoursesReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateCoursesReqMultiError is an error wrapping multiple validation errors
+// returned by UpdateCoursesReq.ValidateAll() if the designated constraints
+// aren't met.
+type UpdateCoursesReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateCoursesReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateCoursesReqMultiError) AllErrors() []error { return m }
+
+// UpdateCoursesReqValidationError is the validation error returned by
+// UpdateCoursesReq.Validate if the designated constraints aren't met.
+type UpdateCoursesReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateCoursesReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateCoursesReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateCoursesReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateCoursesReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateCoursesReqValidationError) ErrorName() string { return "UpdateCoursesReqValidationError" }
+
+// Error satisfies the builtin error interface
+func (e UpdateCoursesReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateCoursesReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateCoursesReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateCoursesReqValidationError{}
+
+// Validate checks the field values on CoursesInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *CoursesInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CoursesInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in CoursesInfoMultiError, or
+// nil if none found.
+func (m *CoursesInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CoursesInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if utf8.RuneCountInString(m.GetName()) < 1 {
+		err := CoursesInfoValidationError{
+			field:  "Name",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetMobile()) != 11 {
+		err := CoursesInfoValidationError{
+			field:  "Mobile",
+			reason: "value length must be 11 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+
+	}
+
+	// no validation rules for Province
+
+	// no validation rules for City
+
+	// no validation rules for Districts
+
+	// no validation rules for Courses
+
+	// no validation rules for PostCode
+
+	// no validation rules for IsDefault
+
+	if len(errors) > 0 {
+		return CoursesInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// CoursesInfoMultiError is an error wrapping multiple validation errors
+// returned by CoursesInfo.ValidateAll() if the designated constraints aren't met.
+type CoursesInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CoursesInfoMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CoursesInfoMultiError) AllErrors() []error { return m }
+
+// CoursesInfoValidationError is the validation error returned by
+// CoursesInfo.Validate if the designated constraints aren't met.
+type CoursesInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CoursesInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CoursesInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CoursesInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CoursesInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CoursesInfoValidationError) ErrorName() string { return "CoursesInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CoursesInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCoursesInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CoursesInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CoursesInfoValidationError{}
+
+// Validate checks the field values on ListCoursesReq with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ListCoursesReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCoursesReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ListCoursesReqMultiError,
+// or nil if none found.
+func (m *ListCoursesReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCoursesReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Uid
+
+	if len(errors) > 0 {
+		return ListCoursesReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCoursesReqMultiError is an error wrapping multiple validation errors
+// returned by ListCoursesReq.ValidateAll() if the designated constraints
+// aren't met.
+type ListCoursesReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCoursesReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCoursesReqMultiError) AllErrors() []error { return m }
+
+// ListCoursesReqValidationError is the validation error returned by
+// ListCoursesReq.Validate if the designated constraints aren't met.
+type ListCoursesReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCoursesReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCoursesReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCoursesReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCoursesReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCoursesReqValidationError) ErrorName() string { return "ListCoursesReqValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ListCoursesReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCoursesReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCoursesReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCoursesReqValidationError{}
+
+// Validate checks the field values on ListCoursesReply with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ListCoursesReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCoursesReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCoursesReplyMultiError, or nil if none found.
+func (m *ListCoursesReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCoursesReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetResults() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListCoursesReplyValidationError{
+						field:  fmt.Sprintf("Results[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListCoursesReplyValidationError{
+						field:  fmt.Sprintf("Results[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListCoursesReplyValidationError{
+					field:  fmt.Sprintf("Results[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListCoursesReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCoursesReplyMultiError is an error wrapping multiple validation errors
+// returned by ListCoursesReply.ValidateAll() if the designated constraints
+// aren't met.
+type ListCoursesReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCoursesReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCoursesReplyMultiError) AllErrors() []error { return m }
+
+// ListCoursesReplyValidationError is the validation error returned by
+// ListCoursesReply.Validate if the designated constraints aren't met.
+type ListCoursesReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCoursesReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCoursesReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCoursesReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCoursesReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCoursesReplyValidationError) ErrorName() string { return "ListCoursesReplyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ListCoursesReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCoursesReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCoursesReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCoursesReplyValidationError{}
+
+// Validate checks the field values on CoursesReq with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *CoursesReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CoursesReq with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in CoursesReqMultiError, or
+// nil if none found.
+func (m *CoursesReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CoursesReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetId() < 1 {
+		err := CoursesReqValidationError{
+			field:  "Id",
+			reason: "value must be greater than or equal to 1",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for Uid
+
+	if len(errors) > 0 {
+		return CoursesReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// CoursesReqMultiError is an error wrapping multiple validation errors
+// returned by CoursesReq.ValidateAll() if the designated constraints aren't met.
+type CoursesReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CoursesReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CoursesReqMultiError) AllErrors() []error { return m }
+
+// CoursesReqValidationError is the validation error returned by
+// CoursesReq.Validate if the designated constraints aren't met.
+type CoursesReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CoursesReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CoursesReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CoursesReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CoursesReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CoursesReqValidationError) ErrorName() string { return "CoursesReqValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CoursesReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCoursesReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CoursesReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CoursesReqValidationError{}
+
+// Validate checks the field values on CreateOrdersReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *CreateOrdersReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateOrdersReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateOrdersReqMultiError, or nil if none found.
+func (m *CreateOrdersReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateOrdersReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Uid
+
+	if utf8.RuneCountInString(m.GetName()) < 1 {
+		err := CreateOrdersReqValidationError{
+			field:  "Name",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetMobile()) != 11 {
+		err := CreateOrdersReqValidationError{
+			field:  "Mobile",
+			reason: "value length must be 11 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+
+	}
+
+	if utf8.RuneCountInString(m.GetProvince()) < 1 {
+		err := CreateOrdersReqValidationError{
+			field:  "Province",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetCity()) < 1 {
+		err := CreateOrdersReqValidationError{
+			field:  "City",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetDistricts()) < 1 {
+		err := CreateOrdersReqValidationError{
+			field:  "Districts",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetOrders()) < 1 {
+		err := CreateOrdersReqValidationError{
+			field:  "Orders",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for PostCode
+
+	// no validation rules for IsDefault
+
+	if len(errors) > 0 {
+		return CreateOrdersReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateOrdersReqMultiError is an error wrapping multiple validation errors
+// returned by CreateOrdersReq.ValidateAll() if the designated constraints
+// aren't met.
+type CreateOrdersReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateOrdersReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateOrdersReqMultiError) AllErrors() []error { return m }
+
+// CreateOrdersReqValidationError is the validation error returned by
+// CreateOrdersReq.Validate if the designated constraints aren't met.
+type CreateOrdersReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateOrdersReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateOrdersReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateOrdersReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateOrdersReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateOrdersReqValidationError) ErrorName() string { return "CreateOrdersReqValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CreateOrdersReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateOrdersReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateOrdersReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateOrdersReqValidationError{}
+
+// Validate checks the field values on UpdateOrdersReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *UpdateOrdersReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateOrdersReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateOrdersReqMultiError, or nil if none found.
+func (m *UpdateOrdersReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateOrdersReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Uid
+
+	// no validation rules for Name
+
+	if utf8.RuneCountInString(m.GetMobile()) != 11 {
+		err := UpdateOrdersReqValidationError{
+			field:  "Mobile",
+			reason: "value length must be 11 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+
+	}
+
+	if utf8.RuneCountInString(m.GetProvince()) < 1 {
+		err := UpdateOrdersReqValidationError{
+			field:  "Province",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetCity()) < 1 {
+		err := UpdateOrdersReqValidationError{
+			field:  "City",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetDistricts()) < 1 {
+		err := UpdateOrdersReqValidationError{
+			field:  "Districts",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetOrders()) < 1 {
+		err := UpdateOrdersReqValidationError{
+			field:  "Orders",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for PostCode
+
+	// no validation rules for IsDefault
+
+	if m.GetId() < 1 {
+		err := UpdateOrdersReqValidationError{
+			field:  "Id",
+			reason: "value must be greater than or equal to 1",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return UpdateOrdersReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateOrdersReqMultiError is an error wrapping multiple validation errors
+// returned by UpdateOrdersReq.ValidateAll() if the designated constraints
+// aren't met.
+type UpdateOrdersReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateOrdersReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateOrdersReqMultiError) AllErrors() []error { return m }
+
+// UpdateOrdersReqValidationError is the validation error returned by
+// UpdateOrdersReq.Validate if the designated constraints aren't met.
+type UpdateOrdersReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateOrdersReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateOrdersReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateOrdersReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateOrdersReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateOrdersReqValidationError) ErrorName() string { return "UpdateOrdersReqValidationError" }
+
+// Error satisfies the builtin error interface
+func (e UpdateOrdersReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateOrdersReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateOrdersReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateOrdersReqValidationError{}
+
+// Validate checks the field values on OrdersInfo with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *OrdersInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OrdersInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in OrdersInfoMultiError, or
+// nil if none found.
+func (m *OrdersInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OrdersInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if utf8.RuneCountInString(m.GetName()) < 1 {
+		err := OrdersInfoValidationError{
+			field:  "Name",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetMobile()) != 11 {
+		err := OrdersInfoValidationError{
+			field:  "Mobile",
+			reason: "value length must be 11 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+
+	}
+
+	// no validation rules for Province
+
+	// no validation rules for City
+
+	// no validation rules for Districts
+
+	// no validation rules for Orders
+
+	// no validation rules for PostCode
+
+	// no validation rules for IsDefault
+
+	if len(errors) > 0 {
+		return OrdersInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// OrdersInfoMultiError is an error wrapping multiple validation errors
+// returned by OrdersInfo.ValidateAll() if the designated constraints aren't met.
+type OrdersInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OrdersInfoMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OrdersInfoMultiError) AllErrors() []error { return m }
+
+// OrdersInfoValidationError is the validation error returned by
+// OrdersInfo.Validate if the designated constraints aren't met.
+type OrdersInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OrdersInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OrdersInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OrdersInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OrdersInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OrdersInfoValidationError) ErrorName() string { return "OrdersInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e OrdersInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOrdersInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OrdersInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OrdersInfoValidationError{}
+
+// Validate checks the field values on ListOrdersReq with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ListOrdersReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListOrdersReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ListOrdersReqMultiError, or
+// nil if none found.
+func (m *ListOrdersReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListOrdersReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Uid
+
+	if len(errors) > 0 {
+		return ListOrdersReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListOrdersReqMultiError is an error wrapping multiple validation errors
+// returned by ListOrdersReq.ValidateAll() if the designated constraints
+// aren't met.
+type ListOrdersReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListOrdersReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListOrdersReqMultiError) AllErrors() []error { return m }
+
+// ListOrdersReqValidationError is the validation error returned by
+// ListOrdersReq.Validate if the designated constraints aren't met.
+type ListOrdersReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListOrdersReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListOrdersReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListOrdersReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListOrdersReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListOrdersReqValidationError) ErrorName() string { return "ListOrdersReqValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ListOrdersReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListOrdersReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListOrdersReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListOrdersReqValidationError{}
+
+// Validate checks the field values on ListOrdersReply with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ListOrdersReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListOrdersReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListOrdersReplyMultiError, or nil if none found.
+func (m *ListOrdersReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListOrdersReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetResults() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListOrdersReplyValidationError{
+						field:  fmt.Sprintf("Results[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListOrdersReplyValidationError{
+						field:  fmt.Sprintf("Results[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListOrdersReplyValidationError{
+					field:  fmt.Sprintf("Results[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListOrdersReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListOrdersReplyMultiError is an error wrapping multiple validation errors
+// returned by ListOrdersReply.ValidateAll() if the designated constraints
+// aren't met.
+type ListOrdersReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListOrdersReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListOrdersReplyMultiError) AllErrors() []error { return m }
+
+// ListOrdersReplyValidationError is the validation error returned by
+// ListOrdersReply.Validate if the designated constraints aren't met.
+type ListOrdersReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListOrdersReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListOrdersReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListOrdersReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListOrdersReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListOrdersReplyValidationError) ErrorName() string { return "ListOrdersReplyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ListOrdersReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListOrdersReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListOrdersReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListOrdersReplyValidationError{}
+
+// Validate checks the field values on OrdersReq with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *OrdersReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OrdersReq with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in OrdersReqMultiError, or nil
+// if none found.
+func (m *OrdersReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OrdersReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetId() < 1 {
+		err := OrdersReqValidationError{
+			field:  "Id",
+			reason: "value must be greater than or equal to 1",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for Uid
+
+	if len(errors) > 0 {
+		return OrdersReqMultiError(errors)
+	}
+
+	return nil
+}
+
+// OrdersReqMultiError is an error wrapping multiple validation errors returned
+// by OrdersReq.ValidateAll() if the designated constraints aren't met.
+type OrdersReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OrdersReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OrdersReqMultiError) AllErrors() []error { return m }
+
+// OrdersReqValidationError is the validation error returned by
+// OrdersReq.Validate if the designated constraints aren't met.
+type OrdersReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OrdersReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OrdersReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OrdersReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OrdersReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OrdersReqValidationError) ErrorName() string { return "OrdersReqValidationError" }
+
+// Error satisfies the builtin error interface
+func (e OrdersReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOrdersReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OrdersReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OrdersReqValidationError{}
+
 // Validate checks the field values on CreateAddressReq with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.

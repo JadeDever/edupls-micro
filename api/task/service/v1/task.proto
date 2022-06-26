@@ -2,29 +2,24 @@ syntax = "proto3";
 
 package api.task.service.v1;
 
-option go_package = "edupls/api/task/service/v1;v1";
-option java_multiple_files = true;
-option java_package = "api.task.service.v1";
+option go_package = "edupls/api/task/service/v1;v1"; 
 
 service Task {
-	rpc CreateTask (CreateTaskRequest) returns (CreateTaskReply);
-	rpc UpdateTask (UpdateTaskRequest) returns (UpdateTaskReply);
-	rpc DeleteTask (DeleteTaskRequest) returns (DeleteTaskReply);
-	rpc GetTask (GetTaskRequest) returns (GetTaskReply);
-	rpc ListTask (ListTaskRequest) returns (ListTaskReply);
+	rpc IntegratingCount(IntegratingCountReq) returns (IntegratingCountReply) {} 
+	rpc GetIntegrating(GetIntegratingReq) returns (GetIntegratingReply) {}
 }
 
-message CreateTaskRequest {}
-message CreateTaskReply {}
 
-message UpdateTaskRequest {}
-message UpdateTaskReply {}
+message GetIntegratingReq{
+	int64 user_id =1;
+}
 
-message DeleteTaskRequest {}
-message DeleteTaskReply {}
+message GetIntegratingReply{
+	int64 grade =1;
+}
 
-message GetTaskRequest {}
-message GetTaskReply {}
+message IntegratingCountReq{
+}
 
-message ListTaskRequest {}
-message ListTaskReply {}
+message IntegratingCountReply {
+}

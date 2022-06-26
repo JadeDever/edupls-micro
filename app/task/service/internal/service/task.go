@@ -1,31 +1,48 @@
+/*
+ * @Author: Jadedever
+ * @Date: 2022-06-26 21:09:38
+ * @LastEditors: Jadedever
+ * @LastEditTime: 2022-06-26 21:28:43
+ * @FilePath: /edupls-micro/app/task/service/internal/service/task.go
+ * @Description:
+ *
+ * Copyright (c) 2022 by Jadedever, All Rights Reserved.
+ */
 package service
 
 import (
 	"context"
+	v1 "edupls/api/task/service/v1"
+	"edupls/app/task/service/internal/biz"
 
-	pb "edupls/api/task/service/v1"
+	"github.com/go-kratos/kratos/v2/log"
 )
 
 type TaskService struct {
-	pb.UnimplementedTaskServer
+	v1.UnimplementedTaskServer
+
+	ac  *biz.TaskUseCase
+	log *log.Helper
 }
 
-func NewTaskService() *TaskService {
-	return &TaskService{}
+func NewTaskService(ac *biz.TaskUseCase, logger log.Logger) *TaskService {
+	return &TaskService{
+		ac:  ac,
+		log: log.NewHelper(log.With(logger, "module", "service/task")),
+	}
+
 }
 
-func (s *TaskService) CreateTask(ctx context.Context, req *pb.CreateTaskRequest) (*pb.CreateTaskReply, error) {
-	return &pb.CreateTaskReply{}, nil
+func (s *TaskService) IntegratingCount(ctx context.Context, req *v1.IntegratingCountReq) (*v1.IntegratingCountReply, error) {
+	return &v1.IntegratingCountReply{}, s.ac.IntegratingCount(ctx)
 }
-func (s *TaskService) UpdateTask(ctx context.Context, req *pb.UpdateTaskRequest) (*pb.UpdateTaskReply, error) {
-	return &pb.UpdateTaskReply{}, nil
-}
-func (s *TaskService) DeleteTask(ctx context.Context, req *pb.DeleteTaskRequest) (*pb.DeleteTaskReply, error) {
-	return &pb.DeleteTaskReply{}, nil
-}
-func (s *TaskService) GetTask(ctx context.Context, req *pb.GetTaskRequest) (*pb.GetTaskReply, error) {
-	return &pb.GetTaskReply{}, nil
-}
-func (s *TaskService) ListTask(ctx context.Context, req *pb.ListTaskRequest) (*pb.ListTaskReply, error) {
-	return &pb.ListTaskReply{}, nil
+
+func (s *TaskService) GetIntegrating(ctx context.Context, req *v1.GetIntegratingReq) (*v1.GetIntegratingReply, error) {
+	rst, err := s.ac.GetIntegrating(ctx, req.UserId)
+	if err != nil {
+		return nil, err
+	}
+	return &v1.GetIntegratingReply{
+		Grade: rst,
+	}, nil
 }

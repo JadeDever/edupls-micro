@@ -2,9 +2,7 @@ syntax = "proto3";
 
 package api.admin.service.v1;
 
-option go_package = "edupls/api/admin/service/v1;v1";
-option java_multiple_files = true;
-option java_package = "api.admin.service.v1";
+option go_package = "edupls/api/admin/service/v1;v1"; 
 
 import "validate/validate.proto";
 import "google/api/annotations.proto";
@@ -33,6 +31,7 @@ service Admin {
       get: "/api/users/detail",
     };
   }
+
   rpc CreateAddress (CreateAddressReq) returns (AddressInfo) {
     option (google.api.http) = {
       post: "/api/address/create",
@@ -61,6 +60,167 @@ service Admin {
       delete: "/api/address/delete",
     };
   }
+
+  rpc CreateOrders (CreateOrdersReq) returns (OrdersInfo) {
+    option (google.api.http) = {
+      post: "/api/orders/create",
+      body: "*",
+    };
+  }
+  rpc OrdersListByUid (google.protobuf.Empty) returns (ListOrdersReply) {
+    option (google.api.http) = {
+      get: "/api/orders/list/uid",
+    };
+  }
+  rpc UpdateOrders (UpdateOrdersReq) returns (CheckResponse) {
+    option (google.api.http) = {
+      put: "/api/orders/update",
+      body: "*",
+    };
+  }
+  rpc DefaultOrders (OrdersReq) returns (CheckResponse) {
+    option (google.api.http) = {
+      put: "/api/orders/default",
+      body: "*",
+    };
+  }
+  rpc DeleteOrders (OrdersReq) returns (CheckResponse) {
+    option (google.api.http) = {
+      delete: "/api/orders/delete",
+    };
+  }
+
+
+
+  rpc CreateCourses (CreateCoursesReq) returns (CoursesInfo) {
+    option (google.api.http) = {
+      post: "/api/courses/create",
+      body: "*",
+    };
+  }
+  rpc CoursesListByUid (google.protobuf.Empty) returns (ListCoursesReply) {
+    option (google.api.http) = {
+      get: "/api/courses/list/uid",
+    };
+  }
+  rpc UpdateCourses (UpdateCoursesReq) returns (CheckResponse) {
+    option (google.api.http) = {
+      put: "/api/courses/update",
+      body: "*",
+    };
+  }
+  rpc DefaultCourses (CoursesReq) returns (CheckResponse) {
+    option (google.api.http) = {
+      put: "/api/courses/default",
+      body: "*",
+    };
+  }
+  rpc DeleteCourses (CoursesReq) returns (CheckResponse) {
+    option (google.api.http) = {
+      delete: "/api/courses/delete",
+    };
+  }
+
+}
+
+message CreateCoursesReq {
+  int64 uid = 1;
+  string name = 2 [(validate.rules).string ={min_len: 1}];
+  string mobile = 3 [(validate.rules).string.len = 11];
+  string Province = 4 [(validate.rules).string ={min_len: 1}];
+  string City = 5 [(validate.rules).string ={min_len: 1}];
+  string Districts = 6 [(validate.rules).string ={min_len: 1}];
+  string courses = 7 [(validate.rules).string ={min_len: 1}];
+  string post_code = 8;
+  int32 is_default = 9;
+}
+
+message UpdateCoursesReq {
+  int64 uid = 1;
+  string name = 2;
+  string mobile = 3 [(validate.rules).string.len = 11];
+  string Province = 4 [(validate.rules).string ={min_len: 1}];
+  string City = 5 [(validate.rules).string ={min_len: 1}];
+  string Districts = 6 [(validate.rules).string ={min_len: 1}];
+  string courses = 7 [(validate.rules).string ={min_len: 1}];
+  string post_code = 8;
+  int32 is_default = 9;
+  int64 id = 10 [(validate.rules).int64.gte = 1];
+}
+
+message CoursesInfo {
+  int64 id = 1;
+  string name = 2 [(validate.rules).string ={min_len: 1}];
+  string mobile = 3 [(validate.rules).string.len = 11];
+  string Province = 4;
+  string City = 5;
+  string Districts = 6;
+  string courses = 7;
+  string post_code = 8;
+  int32 is_default = 9;
+}
+
+message ListCoursesReq {
+  int64 uid = 1;
+}
+
+message ListCoursesReply {
+  repeated CoursesInfo results = 1;
+}
+
+message CoursesReq {
+  int64 id = 1 [(validate.rules).int64.gte = 1];
+  int64 uid = 2;
+}
+
+message CreateOrdersReq {
+  int64 uid = 1;
+  string name = 2 [(validate.rules).string ={min_len: 1}];
+  string mobile = 3 [(validate.rules).string.len = 11];
+  string Province = 4 [(validate.rules).string ={min_len: 1}];
+  string City = 5 [(validate.rules).string ={min_len: 1}];
+  string Districts = 6 [(validate.rules).string ={min_len: 1}];
+  string orders = 7 [(validate.rules).string ={min_len: 1}];
+  string post_code = 8;
+  int32 is_default = 9;
+}
+
+message UpdateOrdersReq {
+  int64 uid = 1;
+  string name = 2;
+  string mobile = 3 [(validate.rules).string.len = 11];
+  string Province = 4 [(validate.rules).string ={min_len: 1}];
+  string City = 5 [(validate.rules).string ={min_len: 1}];
+  string Districts = 6 [(validate.rules).string ={min_len: 1}];
+  string orders = 7 [(validate.rules).string ={min_len: 1}];
+  string post_code = 8;
+  int32 is_default = 9;
+  int64 id = 10 [(validate.rules).int64.gte = 1];
+}
+
+message OrdersInfo {
+  int64 id = 1;
+  string name = 2 [(validate.rules).string ={min_len: 1}];
+  string mobile = 3 [(validate.rules).string.len = 11];
+  string Province = 4;
+  string City = 5;
+  string Districts = 6;
+  string orders = 7;
+  string post_code = 8;
+  int32 is_default = 9;
+}
+
+message ListOrdersReq {
+  int64 uid = 1;
+}
+
+message ListOrdersReply {
+  repeated OrdersInfo results = 1;
+}
+
+message OrdersReq {
+  int64 id = 1 [(validate.rules).int64.gte = 1];
+  int64 uid = 2;
 }
 
 message CreateAddressReq {
