@@ -2,7 +2,7 @@
  * @Author: Jadedever
  * @Date: 2022-06-26 21:48:02
  * @LastEditors: Jadedever
- * @LastEditTime: 2022-06-26 21:50:42
+ * @LastEditTime: 2022-06-26 22:08:02
  * @FilePath: /edupls-micro/app/job/service/internal/server/grpc.go
  * @Description:
  *
@@ -12,13 +12,13 @@ package server
 
 import (
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/goxiaoy/go-saas-kit/pkg/conf"
 
 	"github.com/go-kratos/kratos/v2/middleware/logging"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 
 	v1 "edupls/api/job/service/v1"
-	"edupls/app/job/service/internal/conf"
 	"edupls/app/job/service/internal/service"
 )
 

@@ -2,7 +2,7 @@
  * @Author: Jadedever
  * @Date: 2022-06-26 20:26:01
  * @LastEditors: Jadedever
- * @LastEditTime: 2022-06-26 20:26:03
+ * @LastEditTime: 2022-06-26 22:09:33
  * @FilePath: /edupls-micro/app/admin/service/internal/server/http.go
  * @Description:
  *
@@ -11,10 +11,10 @@
 package server
 
 import (
-	v1 "admin/api/admin/v1"
-	"admin/internal/conf"
-	"admin/internal/service"
 	"context"
+	v1 "edupls/api/admin/service/v1"
+	"edupls/app/admin/service/internal/conf"
+	"edupls/app/admin/service/internal/service"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/auth/jwt"
