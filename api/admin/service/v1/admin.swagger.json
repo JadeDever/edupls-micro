@@ -1,0 +1,537 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/admin/service/v1/admin.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Admin"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/address/create": {
+      "post": {
+        "operationId": "Admin_CreateAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AddressInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateAddressReq"
+            }
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/api/address/default": {
+      "put": {
+        "operationId": "Admin_DefaultAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CheckResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1AddressReq"
+            }
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/api/address/delete": {
+      "delete": {
+        "operationId": "Admin_DeleteAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CheckResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "uid",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/api/address/list/uid": {
+      "get": {
+        "operationId": "Admin_AddressListByUid",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListAddressReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/api/address/update": {
+      "put": {
+        "operationId": "Admin_UpdateAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CheckResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateAddressReq"
+            }
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/api/users/captcha": {
+      "get": {
+        "operationId": "Admin_Captcha",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CaptchaReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/api/users/detail": {
+      "get": {
+        "operationId": "Admin_Detail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UserDetailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "operationId": "Admin_Login",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RegisterReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1LoginReq"
+            }
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/api/users/register": {
+      "post": {
+        "operationId": "Admin_Register",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RegisterReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RegisterReq"
+            }
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AddressInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "Province": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Districts": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "postCode": {
+          "type": "string"
+        },
+        "isDefault": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1AddressReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "uid": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CaptchaReply": {
+      "type": "object",
+      "properties": {
+        "captchaId": {
+          "type": "string"
+        },
+        "picPath": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CheckResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1CreateAddressReq": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "Province": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Districts": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "postCode": {
+          "type": "string"
+        },
+        "isDefault": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1ListAddressReply": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1AddressInfo"
+          }
+        }
+      }
+    },
+    "v1LoginReq": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "v1RegisterReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "expiredAt": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "Data returned by registration and login"
+    },
+    "v1RegisterReq": {
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateAddressReq": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "Province": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Districts": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "postCode": {
+          "type": "string"
+        },
+        "isDefault": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1UserDetailResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "nickName": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string",
+          "format": "int64"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "role": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "user Detail returned"
+    }
+  }
+}

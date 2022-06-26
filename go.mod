@@ -23,7 +23,9 @@ require (
 )
 
 require (
+	github.com/golang-jwt/jwt/v4 v4.0.0
 	github.com/golang/mock v1.4.4 // indirect
+	github.com/gorilla/handlers v1.5.1
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/kr/text v0.2.0 // indirect
@@ -32,6 +34,7 @@ require (
 	github.com/robfig/cron v1.2.0
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/stretchr/objx v0.2.0 // indirect
+	google.golang.org/genproto v0.0.0-20210805201207-89edb61ffb67
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/ini.v1 v1.51.0 // indirect
 	honnef.co/go/tools v0.0.1-2020.1.4 // indirect
