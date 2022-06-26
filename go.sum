@@ -338,6 +338,7 @@ github.com/gorilla/websocket v0.0.0-20170926233335-4201258b820c/go.mod h1:E7qHFY
 github.com/gorilla/websocket v1.4.0/go.mod h1:E7qHFY5m1UJ88s3WnNqhKjPHQ0heANvMoAMk2YaljkQ=
 github.com/gorilla/websocket v1.4.2/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
 github.com/goxiaoy/go-eventbus v0.0.5/go.mod h1:b5yykGpYE+OOVJC/0nlJRzulL5GSyVPPp4Msmwi4vYY=
+github.com/goxiaoy/go-saas v0.1.1-0.20220402162851-7116458f7dea h1:cKE1Tu1irZ5AOlIvOQgAmJo/ehpaNzuhTbHWGOVbwB0=
 github.com/goxiaoy/go-saas v0.1.1-0.20220402162851-7116458f7dea/go.mod h1:a2rhPYmZlcx6tBxzTgoeanrlBl2VWNlt449PPoYVLag=
 github.com/goxiaoy/go-saas-kit v0.0.3 h1:rTpNjtp+wtYpmvaZfyxC/PgZ89KANYfnVnGj3t8RVRg=
 github.com/goxiaoy/go-saas-kit v0.0.3/go.mod h1:id0mfPjSbj1+6yN/sO3NrYPsi6F55TP4ksvI00CYoGQ=
@@ -663,6 +664,7 @@ github.com/spaolacci/murmur3 v0.0.0-20180118202830-f09979ecbc72/go.mod h1:JwIasO
 github.com/spf13/afero v1.1.2/go.mod h1:j4pytiNVoe2o6bmDsKpLACNPDBIoEAkihy7loJ1B0CQ=
 github.com/spf13/afero v1.3.3/go.mod h1:5KUK8ByomD5Ti5Artl0RtHeI5pTF7MIDuXL3yY520V4=
 github.com/spf13/afero v1.6.0/go.mod h1:Ai8FlHk4v/PARR026UzYexafAt9roJ7LcLMAmO6Z93I=
+github.com/spf13/afero v1.8.2 h1:xehSyVa0YnHWsJ49JFljMpg1HX19V6NDZ1fkm1Xznbo=
 github.com/spf13/afero v1.8.2/go.mod h1:CtAatgMJh6bJEIs48Ay/FOnkljP3WeGUG0MC1RfAqwo=
 github.com/spf13/cast v1.3.0/go.mod h1:Qx5cxh0v+4UWYiBimWS+eyWzqEqokIECu5etghLkUJE=
 github.com/spf13/cobra v0.0.3/go.mod h1:1l0Ry5zgKvJasoi3XT1TypsSe7PqH0Sj9dhYf7v3XqQ=
